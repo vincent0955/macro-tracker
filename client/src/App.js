@@ -6,9 +6,11 @@ import Navbar from "./components/navbar";
 import EntryList from "./components/entryList";
 import Edit from "./components/edit";
 import Create from "./components/create";
+import Dashboard from "./dashboard/Dashboard.js";
  const App = () => {
  return (
    <div>
+    <Dashboard />
      <Navbar />
      <Routes>
        <Route exact path="/" element={<EntryList />} />

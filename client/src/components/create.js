@@ -5,6 +5,8 @@ export default function Create() {
    name: "",
    calories: "",
    protein: "",
+   carbs: "",
+   fat: "",
  });
  const navigate = useNavigate();
   // These methods will update the state properties.
@@ -29,7 +31,7 @@ export default function Create() {
      window.alert(error);
      return;
    });
-    setForm({ name: "", calories: "", protein: "" });
+    setForm({ name: "", calories: "", protein: "", carbs: "", fat: "" });
    navigate("/");
  }
   // This following section will display the form that takes the input from the user.
@@ -58,13 +60,33 @@ export default function Create() {
          />
        </div>
        <div className="form-group">
-         <label htmlFor="calories">Protein: </label>
+         <label htmlFor="protein">Protein: </label>
          <input
            type="number"
            className="form-control"
            id="protein"
            value={form.protein}
            onChange={(e) => updateForm({ protein: e.target.value })}
+         />
+        </div>
+        <div className="form-group">
+        <label htmlFor="carbs">Carbs: </label>
+         <input
+           type="number"
+           className="form-control"
+           id="carbs"
+           value={form.carbs}
+           onChange={(e) => updateForm({ carbs: e.target.value })}
+         />
+         </div>
+        <div className="form-group">
+          <label htmlFor="fat">Fat: </label>
+         <input
+           type="number"
+           className="form-control"
+           id="fat"
+           value={form.fat}
+           onChange={(e) => updateForm({ fat: e.target.value })}
          />
        </div>
        <div className="form-group">

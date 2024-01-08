@@ -5,6 +5,8 @@ import { useParams, useNavigate } from "react-router";
    name: "",
    calories: "",
    protein: "",
+   carbs: "", 
+   fat: "",
    records: [],
  });
  const params = useParams();
@@ -41,6 +43,8 @@ import { useParams, useNavigate } from "react-router";
      name: form.name,
      calories: form.calories,
      protein: form.protein,
+     carbs: form.carbs, 
+     fat: form.fat,
    };
     // This will send a patch request to update the data in the database.
    await fetch(`http://localhost:5000/entries/${params.id}`, {
@@ -85,6 +89,26 @@ import { useParams, useNavigate } from "react-router";
            id="protein"
            value={form.protein}
            onChange={(e) => updateForm({ protein: e.target.value })}
+         />
+       </div>
+       <div className="form-group">
+        <label htmlFor="carbs">Carbs: </label>
+         <input
+           type="number"
+           className="form-control"
+           id="carbs"
+           value={form.carbs}
+           onChange={(e) => updateForm({ carbs: e.target.value })}
+         />
+         </div>
+        <div className="form-group">
+          <label htmlFor="fat">Fat: </label>
+         <input
+           type="number"
+           className="form-control"
+           id="fat"
+           value={form.fat}
+           onChange={(e) => updateForm({ fat: e.target.value })}
          />
        </div>
        <br />

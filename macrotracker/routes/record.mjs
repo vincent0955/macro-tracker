@@ -28,6 +28,8 @@ router.post("/", async (req, res) => {
     name: req.body.name,
     calories: req.body.calories,
     protein: req.body.protein,
+    carbs: req.body.carbs,
+    fat: req.body.fat,
     dateadded: currentDate
   };
   let collection = await db.collection("entries");
@@ -42,7 +44,9 @@ router.patch("/:id", async (req, res) => {
     $set: {
       name: req.body.name,
       calories: req.body.calories,
-      protein: req.body.protein
+      protein: req.body.protein,
+      carbs: req.body.carbs,
+      fat: req.body.fat,
     }
   };
   let collection = await db.collection("entries");

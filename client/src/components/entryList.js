@@ -5,6 +5,8 @@ const Record = (props) => (
    <td>{props.record.name}</td>
    <td>{props.record.calories}</td>
    <td>{props.record.protein}</td>
+   <td>{props.record.carbs}</td>
+   <td>{props.record.fat}</td>
    <td>
      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
      <button className="btn btn-link"
@@ -64,6 +66,8 @@ export default function RecordList() {
            <th>Entry</th>
            <th>Calories</th>
            <th>Protein</th>
+           <th>Carbs</th>
+           <th>Fat</th>
            <th>Action</th>
          </tr>
        </thead>
