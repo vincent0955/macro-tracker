@@ -3,10 +3,10 @@ import { useParams, useNavigate } from "react-router";
  export default function Edit() {
  const [form, setForm] = useState({
    name: "",
-   calories: "",
-   protein: "",
-   carbs: "", 
-   fat: "",
+   calories: 0,
+   protein: 0,
+   carbs: 0, 
+   fat: 0,
    records: [],
  });
  const params = useParams();
@@ -14,7 +14,7 @@ import { useParams, useNavigate } from "react-router";
   useEffect(() => {
    async function fetchData() {
      const id = params.id.toString();
-     const response = await fetch(`http://localhost:5000/entries/${params.id.toString()}`);
+     const response = await fetch(`http://localhost:5000/entries/id/${params.id.toString()}`);
       if (!response.ok) {
        const message = `An error has occurred: ${response.statusText}`;
        window.alert(message);

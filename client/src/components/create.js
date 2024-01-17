@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+
+
 export default function Create() {
  const [form, setForm] = useState({
    name: "",
-   calories: "",
-   protein: "",
-   carbs: "",
-   fat: "",
+   calories: 0,
+   protein: 0,
+   carbs: 0,
+   fat: 0,
  });
  const navigate = useNavigate();
   // These methods will update the state properties.
@@ -31,70 +36,58 @@ export default function Create() {
      window.alert(error);
      return;
    });
-    setForm({ name: "", calories: "", protein: "", carbs: "", fat: "" });
+    setForm({ name: "", calories: 0, protein: 0, carbs: 0, fat: 0 });
    navigate("/");
  }
   // This following section will display the form that takes the input from the user.
  return (
    <div>
-     <h3>Create New Entry</h3>
+     <h3>Track</h3>
      <form onSubmit={onSubmit}>
        <div className="form-group">
-         <label htmlFor="name">Entry</label>
-         <input
-           type="text"
-           className="form-control"
-           id="name"
-           value={form.name}
-           onChange={(e) => updateForm({ name: e.target.value })}
+         <TextField id="name" label="Entry" variant="standard" 
+          sx={{ m: 1, width: '66ch' }}
+          type="text"
+          className="form-control"
+          value={form.name}
+          onChange={(e) => updateForm({ name: e.target.value })}
          />
        </div>
        <div className="form-group">
-         <label htmlFor="Calories">Calories</label>
-         <input
-           type="number"
-           className="form-control"
-           id="calories"
-           value={form.calories}
-           onChange={(e) => updateForm({ calories: e.target.value })}
+         <TextField id="calories" label="Calories" variant="standard" 
+            sx={{ m: 1, width: '15ch' }}
+            type="number"
+            className="form-control"
+            value={form.calories}
+            onChange={(e) => updateForm({ calories: parseInt(e.target.value) })}
          />
+        
+        <TextField id="protein" label="Protein" variant="standard" 
+            sx={{ m: 1, width: '15ch' }}
+            type="number"
+            className="form-control"
+            value={form.protein}
+            onChange={(e) => updateForm({ protein: parseInt(e.target.value) })}
+          />
+        
+          <TextField id="carbs" label="Carbs" variant="standard" 
+            sx={{ m: 1, width: '15ch' }}
+            type="number"
+            className="form-control"
+            value={form.carbs}
+            onChange={(e) => updateForm({ carbs: parseInt(e.target.value) })}
+          />
+        
+          <TextField id="fat" label="Fat" variant="standard" 
+            sx={{ m: 1, width: '15ch' }}
+            type="number"
+            className="form-control"
+            value={form.fat}
+            onChange={(e) => updateForm({ fat: parseInt(e.target.value) })}
+          />
        </div>
        <div className="form-group">
-         <label htmlFor="protein">Protein: </label>
-         <input
-           type="number"
-           className="form-control"
-           id="protein"
-           value={form.protein}
-           onChange={(e) => updateForm({ protein: e.target.value })}
-         />
-        </div>
-        <div className="form-group">
-        <label htmlFor="carbs">Carbs: </label>
-         <input
-           type="number"
-           className="form-control"
-           id="carbs"
-           value={form.carbs}
-           onChange={(e) => updateForm({ carbs: e.target.value })}
-         />
-         </div>
-        <div className="form-group">
-          <label htmlFor="fat">Fat: </label>
-         <input
-           type="number"
-           className="form-control"
-           id="fat"
-           value={form.fat}
-           onChange={(e) => updateForm({ fat: e.target.value })}
-         />
-       </div>
-       <div className="form-group">
-         <input
-           type="submit"
-           value="Create Entry"
-           className="btn btn-primary"
-         />
+        <Button variant="contained" onClick={onSubmit} sx={{ m: 1 }}>Create Entry</Button>
        </div>
      </form>
    </div>

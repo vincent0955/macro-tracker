@@ -60,6 +60,7 @@ export default function RecordList() {
  return (
    <div>
      <h3>Entry List</h3>
+     <h2>Today</h2>
      <table className="table table-striped" style={{ marginTop: 20 }}>
        <thead>
          <tr>

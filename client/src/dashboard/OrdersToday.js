@@ -14,9 +14,7 @@ import TableContainer from '@mui/material/TableContainer';
 import Button from '@mui/material/Button';
 
 
-
 const Record = (props) => (
-  
   <tr>
     <TableCell component="th" scope="row">{props.record.name}</TableCell>
     <TableCell align="right">{props.record.calories}</TableCell>
@@ -45,7 +43,7 @@ const Record = (props) => (
    // This method fetches the records from the database.
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://localhost:5000/entries/excludetoday`);
+      const response = await fetch(`http://localhost:5000/entries/today`);
        if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
@@ -67,35 +65,6 @@ const Record = (props) => (
   }
 // This method will map out the records on the table
   function recordList() {
-    // return records.map((row) => (
-      
-    //   <TableRow
-    //     hover 
-    //     key={row.name}
-    //     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-    //     onClick={handleClick}
-    //   >
-        
-    //     <TableCell component="th" scope="row">
-    //       {row.name}
-    //     </TableCell>
-    //     <TableCell align="right">{row.calories}</TableCell>
-    //     <TableCell align="right">{row.fat}</TableCell>
-    //     <TableCell align="right">{row.carbs}</TableCell>
-    //     <TableCell align="right">{row.protein}</TableCell>
-    //     <TableCell align="right">{row.dateadded}</TableCell>
-
-    //     <Popper id={id} open={open} anchorEl={anchorEl}>
-          
-    //       <Box sx={{ border: 1, p: 1, bgcolor: 'background.paper' }}>
-    //         The content of the Popper.
-    //       </Box>
-    //     </Popper>
-        
-    //   </TableRow>
-      
-      
-    // ))
     return records.map((record) => {
       return (
         <Record
@@ -110,7 +79,6 @@ const Record = (props) => (
    // This following section will display the table with the records of individuals.
   return (
     <div>
-      <h5>Earlier this week</h5>
       {/* <Popup trigger = {openPopup} setTrigger = {setOpenPopup}>
           <h1>my popup</h1>
         </Popup> */}

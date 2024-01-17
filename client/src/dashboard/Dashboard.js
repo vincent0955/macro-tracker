@@ -21,7 +21,9 @@ import { mainListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import OrdersToday from './OrdersToday';
 import Create from "../components/create";
+import Daily from "../components/daily";
 
 
 function Copyright(props) {
@@ -123,11 +125,6 @@ export default function Dashboard() {
             >
               Track
             </Typography>
-            {/* <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -166,48 +163,50 @@ export default function Dashboard() {
           <Container maxWidth="false" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Chart */}
-              {/* <Grid item xs={12} md={8} lg={9}>
+              <Grid item xs={12} md={8} lg={5}>
                 <Paper
                   sx={{
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid> */}
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={12}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 420,
+                    height: 300,
                   }}
                 >
                   <Create />
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
-              {/* <Grid item xs={12} md={4} lg={3}>
+              {/* <Grid item xs={12} md={4} lg={7}>
                 <Paper
                   sx={{
-                    p: 2,
+                    p: 1,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 320,
+                    height: 300,
                   }}
                 >
                   <Deposits />
                 </Paper>
               </Grid> */}
-              {/* Recent Orders */}
+              {/* Recent Orders */} 
               <Grid item xs={12}>
+                
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                  <div style={{
+                      padding: "5px"
+                    }}> 
+                    <Daily />
+                  </div>
+                  <div style={{
+                      padding: "5px"
+                    }}> 
+                  <OrdersToday />
+                  </div>
+                  <div style={{
+                      padding: "5px"
+                    }}> 
                   <Orders />
+                  </div>
                 </Paper>
               </Grid>
             </Grid>

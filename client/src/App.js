@@ -11,11 +11,12 @@ import Dashboard from "./dashboard/Dashboard.js";
  return (
    <div>
     <Dashboard />
-     <Navbar />
+     {/* <Navbar /> */}
      <Routes>
-       <Route exact path="/" element={<EntryList />} />
        <Route path="/edit/:id" element={<Edit />} />
-       <Route path="/create" element={<Create />} />
+       {/* <Route exact path="/" element={<EntryList />} />
+       <Route path="/edit/:id" element={<Edit />} />
+       <Route path="/create" element={<Create />} /> */}
      </Routes>
    </div>
  );

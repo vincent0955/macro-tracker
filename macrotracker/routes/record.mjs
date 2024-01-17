@@ -11,8 +11,54 @@ router.get("/", async (req, res) => {
   res.send(results).status(200);
 });
 
+// get all entries for today
+router.get("/today", async (req, res) => {
+  let collection = await db.collection("entries");
+  let today = new Date();
+  today.setHours(0,0,0,0);
+  let results = await collection.find( { dateadded: { $gt: today } } ).sort({_id:-1}).toArray();
+  
+  res.send(results).status(200);
+});
+
+// get all macros for today
+router.get("/today/sum", async (req, res) => {
+  let collection = await db.collection("entries");
+  let today = new Date();
+  today.setHours(0,0,0,0);
+  let results = await collection.find( { dateadded: { $gt: today } } ).sort({_id:-1}).toArray();
+  var macros = [0, 0, 0, 0];
+  for (var i = 0; i < results.length; i++) {
+    macros[0] += results[i].calories;
+    macros[1] += results[i].protein;
+    macros[2] += results[i].carbs;
+    macros[3] += results[i].fat;
+  }
+  res.send(macros).status(200);
+});
+
+// get all entries for not today
+router.get("/excludetoday", async (req, res) => {
+  let collection = await db.collection("entries");
+  let today = new Date();
+  today.setHours(0,0,0,0);
+  let results = await collection.find( { dateadded: { $lt: today } } ).sort({_id:-1}).toArray();
+  res.send(results).status(200);
+});
+
+// get all entries for this week
+router.get("/week", async (req, res) => {
+  let collection = await db.collection("entries");
+  var oneWeekAgo = new Date();
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+  oneWeekAgo.setHours(0,0,0,0);
+  let results = await collection.find( { dateadded: { $gt: oneWeekAgo } } ).sort({_id:-1}).toArray();
+  res.send(results).status(200);
+});
+
+
 // get single entry
-router.get("/:id", async (req, res) => {
+router.get("/id/:id", async (req, res) => {
   let collection = await db.collection("entries");
   let query = {_id: new ObjectId(req.params.id)};
   let result = await collection.findOne(query);
@@ -60,6 +106,18 @@ router.delete("/:id", async (req, res) => {
 
   const collection = db.collection("entries");
   let result = await collection.deleteOne(query);
+
+  res.send(result).status(200);
+});
+
+// search entries using entry name (starts-with)
+router.get("/name/:name", async (req, res) => {
+  let collection = await db.collection("entries");
+
+  let str = "^".concat(req.params.name)
+  let re = new RegExp(str);
+
+  let result = await collection.find({name: { $regex: re } } ).toArray();;
 
   res.send(result).status(200);
 });
