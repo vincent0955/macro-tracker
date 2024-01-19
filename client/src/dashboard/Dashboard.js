@@ -18,8 +18,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
 import Orders from './Orders';
 import OrdersToday from './OrdersToday';
 import Create from "../components/create";
@@ -175,19 +173,7 @@ export default function Dashboard() {
                   <Create />
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
-              {/* <Grid item xs={12} md={4} lg={7}>
-                <Paper
-                  sx={{
-                    p: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 300,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid> */}
+
               {/* Recent Orders */} 
               <Grid item xs={12}>
                 

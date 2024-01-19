@@ -7,16 +7,15 @@ import EntryList from "./components/entryList";
 import Edit from "./components/edit";
 import Create from "./components/create";
 import Dashboard from "./dashboard/Dashboard.js";
+import Reports from "./dashboard/Reports.js";
+
  const App = () => {
  return (
    <div>
-    <Dashboard />
-     {/* <Navbar /> */}
      <Routes>
+      <Route path="/" element={<Dashboard />} />
        <Route path="/edit/:id" element={<Edit />} />
-       {/* <Route exact path="/" element={<EntryList />} />
-       <Route path="/edit/:id" element={<Edit />} />
-       <Route path="/create" element={<Create />} /> */}
+       <Route path="/Reports" element={<Reports />} />
      </Routes>
    </div>
  );

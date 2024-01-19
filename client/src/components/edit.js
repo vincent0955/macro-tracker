@@ -78,7 +78,7 @@ import { useParams, useNavigate } from "react-router";
            className="form-control"
            id="calories"
            value={form.calories}
-           onChange={(e) => updateForm({ calories: e.target.value })}
+           onChange={(e) => updateForm({ calories: parseInt(e.target.value) })}
          />
        </div>
        <div className="form-group">
@@ -88,7 +88,7 @@ import { useParams, useNavigate } from "react-router";
            className="form-control"
            id="protein"
            value={form.protein}
-           onChange={(e) => updateForm({ protein: e.target.value })}
+           onChange={(e) => updateForm({ protein: parseInt(e.target.value) })}
          />
        </div>
        <div className="form-group">
@@ -98,7 +98,7 @@ import { useParams, useNavigate } from "react-router";
            className="form-control"
            id="carbs"
            value={form.carbs}
-           onChange={(e) => updateForm({ carbs: e.target.value })}
+           onChange={(e) => updateForm({ carbs: parseInt(e.target.value) })}
          />
          </div>
         <div className="form-group">
@@ -108,7 +108,7 @@ import { useParams, useNavigate } from "react-router";
            className="form-control"
            id="fat"
            value={form.fat}
-           onChange={(e) => updateForm({ fat: e.target.value })}
+           onChange={(e) => updateForm({ fat: parseInt(e.target.value) })}
          />
        </div>
        <br />

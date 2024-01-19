@@ -122,4 +122,46 @@ router.get("/name/:name", async (req, res) => {
   res.send(result).status(200);
 });
 
+/***  this function returns info for the weekly reports(data.js) component
+          - get todays day of the week
+          - organize the week's data starting from sunday into the bar chart format; 7x3 array
+*/
+router.get("/weeklyreport", async (req, res) => {
+  let collection = await db.collection("entries");
+  let today = new Date();
+  let day = today.getDay();
+  let endDay = new Date();
+  endDay.setDate(today.getDate());
+  today.setHours(0,0,0,0);
+  
+  let results = await collection.find( { dateadded: { $gt: today } } ).sort({_id:-1}).toArray();
+  var macros = [[0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0]];
+
+
+  console.log(new Date());
+
+  while (day >= 0) {
+    
+    for (var i = 0; i < results.length; i++) {
+      macros[0][day] += results[i].calories;
+      macros[1][day] += results[i].protein;
+      macros[2][day] += results[i].carbs;
+      macros[3][day] += results[i].fat;
+    }
+    // console.log(today, endDay);
+    endDay.setTime(today.getTime());
+    today.setDate(today.getDate() - 1);    
+
+    results = await collection.find( { dateadded: { $gt: today, $lt: endDay } } ).sort({_id:-1}).toArray();
+    
+    day--;
+  }
+  
+  
+  res.send(macros).status(200);
+});
+
 export default router;
