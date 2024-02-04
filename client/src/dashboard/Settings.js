@@ -16,11 +16,9 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from './listItems';
+import { myTheme } from './Dashboard.js';
+import SettingsHelper from './SettingsHelper.js';
 
-import Data from './Data.js';
-import { myTheme } from './Dashboard.js'
-import { create } from '@mui/material/styles/createTransitions.js';
-import DayData from './DayData.js';
 
 const drawerWidth = 240;
 
@@ -105,7 +103,7 @@ export default function Dashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Reports
+              Settings
             </Typography>
           </Toolbar>
         </AppBar>
@@ -142,16 +140,12 @@ export default function Dashboard() {
         >
           <Toolbar />
           <Container maxWidth="false" sx={{ mt: 4, mb: 4 }}>
+              
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Data />
-                </Paper>
-              </Grid>
-          </Container>
-          <Container maxWidth="false" sx={{ mt: 4, mb: 4 }}>
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <DayData />
+
+                    <SettingsHelper />
+
                 </Paper>
               </Grid>
           </Container>

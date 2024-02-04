@@ -122,7 +122,7 @@ router.get("/name/:name", async (req, res) => {
   res.send(result).status(200);
 });
 
-/***  this function returns info for the weekly reports(data.js) component
+/***  this returns info for the weekly reports(data.js) component
           - get todays day of the week
           - organize the week's data starting from sunday into the bar chart format; 7x3 array
 */
@@ -141,8 +141,6 @@ router.get("/weeklyreport", async (req, res) => {
                 [0, 0, 0, 0, 0, 0, 0]];
 
 
-  console.log(new Date());
-
   while (day >= 0) {
     
     for (var i = 0; i < results.length; i++) {
@@ -151,7 +149,6 @@ router.get("/weeklyreport", async (req, res) => {
       macros[2][day] += results[i].carbs;
       macros[3][day] += results[i].fat;
     }
-    // console.log(today, endDay);
     endDay.setTime(today.getTime());
     today.setDate(today.getDate() - 1);    
 
@@ -163,5 +160,85 @@ router.get("/weeklyreport", async (req, res) => {
   
   res.send(macros).status(200);
 });
+
+
+// ******* DATE PICKER ENDPOINTS *******
+
+// Get sum for specific date
+router.get("/report/:date", async (req, res) => {
+  let deserialized = new Date(req.params.date);
+  let collection = await db.collection("entries");
+  let endDay = new Date(deserialized.getTime());
+  endDay.setDate(endDay.getDate()+1);
+  deserialized.setHours(0,0,0,0);
+  endDay.setHours(0,0,0,0);
+  // console.log(deserialized, endDay);
+
+  let results = await collection.find( { dateadded: { $gt: deserialized, $lt: endDay } } ).sort({_id:-1}).toArray();
+  let macros = [0, 0, 0, 0];
+  for (let i = 0; i < results.length; i++) {
+    macros[0] += results[i].calories;
+    macros[1] += results[i].protein;
+    macros[2] += results[i].carbs;
+    macros[3] += results[i].fat;
+  }
+  res.send(macros).status(200);
+});
+
+// get entries for specific date
+router.get("/today/:date", async (req, res) => {
+  let deserialized = new Date(req.params.date);
+  let collection = await db.collection("entries");
+  let endDay = new Date(deserialized.getTime());
+  endDay.setDate(endDay.getDate()+1);
+  deserialized.setHours(0,0,0,0);
+  endDay.setHours(0,0,0,0);
+
+  let results = await collection.find( { dateadded: { $gt: deserialized, $lt: endDay } } ).sort({_id:-1}).toArray();
+  
+  res.send(results).status(200);
+});
+
+// Similar to /weeklyreport/ but lets you pass date and gets info from the next saturday from the date
+router.get("/weeklyreport/:date", async (req, res) => {
+  let deserialized = new Date(req.params.date);
+  deserialized.setDate(deserialized.getDate() + (6 + 7 - deserialized.getDay()) % 7);
+  let day = deserialized.getDay();
+  let collection = await db.collection("entries");
+  let endDay = new Date(deserialized.getTime());
+  endDay.setDate(endDay.getDate()+1);
+  deserialized.setHours(0,0,0,0);
+  endDay.setHours(0,0,0,0);
+
+  
+  let results = await collection.find( { dateadded: { $gt: deserialized, $lt: endDay } } ).sort({_id:-1}).toArray();
+  var macros = [[0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0]];
+
+
+  while (day >= 0) {
+    
+    for (var i = 0; i < results.length; i++) {
+      macros[0][day] += results[i].calories;
+      macros[1][day] += results[i].protein;
+      macros[2][day] += results[i].carbs;
+      macros[3][day] += results[i].fat;
+    }
+
+    endDay.setTime(deserialized.getTime());
+    deserialized.setDate(deserialized.getDate() - 1);    
+
+    results = await collection.find( { dateadded: { $gt: deserialized, $lt: endDay } } ).sort({_id:-1}).toArray();
+    
+    day--;
+  }
+  
+  
+  res.send(macros).status(200);
+});
+
+
 
 export default router;

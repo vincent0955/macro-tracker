@@ -1,13 +1,13 @@
 import React from "react";
-// We use Route in order to define the different routes of our application
 import { Route, Routes } from "react-router-dom";
- // We import all the components we need in our app
+
 import Navbar from "./components/navbar";
 import EntryList from "./components/entryList";
 import Edit from "./components/edit";
 import Create from "./components/create";
 import Dashboard from "./dashboard/Dashboard.js";
 import Reports from "./dashboard/Reports.js";
+import Settings from "./dashboard/Settings.js";
 
  const App = () => {
  return (
@@ -16,6 +16,7 @@ import Reports from "./dashboard/Reports.js";
       <Route path="/" element={<Dashboard />} />
        <Route path="/edit/:id" element={<Edit />} />
        <Route path="/Reports" element={<Reports />} />
+       <Route path="/Settings" element={<Settings />} />
      </Routes>
    </div>
  );

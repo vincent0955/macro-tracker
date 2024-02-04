@@ -22,6 +22,7 @@ import Orders from './Orders';
 import OrdersToday from './OrdersToday';
 import Create from "../components/create";
 import Daily from "../components/daily";
+import { grey, purple } from '@mui/material/colors';
 
 
 function Copyright(props) {
@@ -83,8 +84,20 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+  palette: {
+    primary: {
+      main: purple[400],
+    },
+    secondary: {
+      main: grey[500],
+    },
+  },
+});
+
+export function myTheme() {
+  return defaultTheme;
+}
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
@@ -161,7 +174,7 @@ export default function Dashboard() {
           <Container maxWidth="false" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Chart */}
-              <Grid item xs={12} md={8} lg={5}>
+              <Grid item xs={12} md={8} lg={6}>
                 <Paper
                   sx={{
                     p: 2,
@@ -173,16 +186,29 @@ export default function Dashboard() {
                   <Create />
                 </Paper>
               </Grid>
+              {/* daily goal */}
+              <Grid item xs={12} md={8} lg={6}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 300,
+                  }}
+                >
+                <Daily />
+                </Paper>
+              </Grid>
 
               {/* Recent Orders */} 
               <Grid item xs={12}>
                 
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <div style={{
+                  {/* <div style={{
                       padding: "5px"
                     }}> 
                     <Daily />
-                  </div>
+                  </div> */}
                   <div style={{
                       padding: "5px"
                     }}> 

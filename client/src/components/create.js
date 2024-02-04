@@ -37,7 +37,7 @@ export default function Create() {
      return;
    });
     setForm({ name: "", calories: 0, protein: 0, carbs: 0, fat: 0 });
-   navigate("/");
+    navigate("/");
  }
   // This following section will display the form that takes the input from the user.
  return (
@@ -46,7 +46,7 @@ export default function Create() {
      <form onSubmit={onSubmit}>
        <div className="form-group">
          <TextField id="name" label="Entry" variant="standard" 
-          sx={{ m: 1, width: '66ch' }}
+          sx={{ m: 1, width: '66ch'}}
           type="text"
           className="form-control"
           value={form.name}

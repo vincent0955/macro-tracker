@@ -78,6 +78,7 @@ const Record = (props) => (
    // This following section will display the table with the records of individuals.
   return (
     <div>
+      <h5>Today</h5>
       {/* <Popup trigger = {openPopup} setTrigger = {setOpenPopup}>
           <h1>my popup</h1>
         </Popup> */}

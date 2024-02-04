@@ -9,6 +9,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import { SpeedDialIcon, StepIcon } from '@mui/material';
 
 export const mainListItems = (
   <React.Fragment>
@@ -23,6 +24,12 @@ export const mainListItems = (
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Reports"/>
+    </ListItemButton>
+    <ListItemButton to={`/Settings`}>
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary="Settings"/>
     </ListItemButton>
   </React.Fragment>
 );
